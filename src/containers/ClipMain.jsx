@@ -48,7 +48,15 @@ class ClipMain extends React.Component {
             slugs[j] = temp
         }
 
-        console.log(slugs)
+        this.setState({ slugs })
+    }
+
+    handleNext = () => {
+        const slugs = this.state.slugs
+
+        const currentSlug = slugs.shift()
+        slugs.push(currentSlug)
+
         this.setState({ slugs })
     }
 
@@ -78,6 +86,11 @@ class ClipMain extends React.Component {
                     onClick={this.handleRandom}
                 >
                     Randomize
+                </button>
+                <button
+                    onClick={this.handleNext}
+                >
+                    Next
                 </button>
             </div>
         )
