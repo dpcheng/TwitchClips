@@ -24,25 +24,34 @@ class ClipMain extends React.Component {
         const myRe = /(?:https:\/\/clips.twitch.tv\/)(\S+)/g
         var myArray;
         while ((myArray = myRe.exec(rawText)) !== null) {
-            console.log(this.state.slugs.length, myArray[1])
-            this.setState({ slugs: this.state.slugs.push(myArray[1]) })
+            if (this.state.slugs.push) {
+                const slugs = this.state.slugs
+                slugs.push(myArray[1])
+                if (typeof myArray[1] === "string") {
+                    this.setState({ slugs })
+                }
+            }
         }
     }
 
     render() {
+        console.log(this.state.slugs)
         return (
             // <div
             //     id="channel-main"
             // />
             <div>
-                <iframe
-                    src="https://clips.twitch.tv/embed?clip=SpeedyCaringOcelotDansGame"
-                    height={700}
-                    width={document.body.offsetWidth}
-                    scrolling={false}
-                    allowfullscreen={true}
-                    preload=""
-                />
+                {
+                    this.state.slugs.length > 0 &&
+                    <iframe
+                        src={`https://clips.twitch.tv/embed?clip=${this.state.slugs[0]}`}
+                        height={700}
+                        width={document.body.offsetWidth}
+                        scrolling={false}
+                        allowfullscreen={true}
+                        preload=""
+                    />
+                }
                 <input
                     type="text"
                     onChange={this.handleTextChange}
