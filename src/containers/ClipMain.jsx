@@ -51,6 +51,15 @@ class ClipMain extends React.Component {
         this.setState({ slugs })
     }
 
+    handlePrevious = () => {
+        const slugs = this.state.slugs
+
+        const currentSlug = slugs.pop()
+        slugs.unshift(currentSlug)
+
+        this.setState({ slugs })
+    }
+
     handleNext = () => {
         const slugs = this.state.slugs
 
@@ -61,7 +70,9 @@ class ClipMain extends React.Component {
     }
 
     render() {
-        console.log(this.state.slugs)
+        const url = `https://clips.twitch.tv/${this.state.slugs[0]}`
+        console.log(url)
+
         return (
             // <div
             //     id="channel-main"
@@ -88,10 +99,22 @@ class ClipMain extends React.Component {
                     Randomize
                 </button>
                 <button
+                    onClick={this.handlePrevious}
+                >
+                    Previous
+                </button>
+                <button
                     onClick={this.handleNext}
                 >
                     Next
                 </button>
+                <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Open in New Tab
+                </a>
             </div>
         )
     }
