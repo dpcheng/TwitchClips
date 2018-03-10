@@ -30,15 +30,13 @@ class ClipMain extends React.Component {
         const rawText = e.currentTarget.value
         const myRe = /(?:https:\/\/clips.twitch.tv\/)(\S+)/g
         var myArray;
+        const slugs = []
         while ((myArray = myRe.exec(rawText)) !== null) {
             if (this.state.slugs.push) {
-                const slugs = this.state.slugs
                 slugs.push(myArray[1])
-                if (typeof myArray[1] === "string") {
-                    this.setState({ slugs })
-                }
             }
         }
+        this.setState({ slugs })
     }
 
     handleRandom = () => {
