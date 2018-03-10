@@ -34,6 +34,24 @@ class ClipMain extends React.Component {
         }
     }
 
+    handleRandom = () => {
+        var slugs = this.state.slugs
+
+        var i = 0
+            , j = 0
+            , temp = null
+
+        for (i = slugs.length - 1; i > 0; i -= 1) {
+            j = Math.floor(Math.random() * (i + 1))
+            temp = slugs[i]
+            slugs[i] = slugs[j]
+            slugs[j] = temp
+        }
+
+        console.log(slugs)
+        this.setState({ slugs })
+    }
+
     render() {
         console.log(this.state.slugs)
         return (
@@ -56,6 +74,11 @@ class ClipMain extends React.Component {
                     type="text"
                     onChange={this.handleTextChange}
                 />
+                <button
+                    onClick={this.handleRandom}
+                >
+                    Randomize
+                </button>
             </div>
         )
     }
