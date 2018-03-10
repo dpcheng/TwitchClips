@@ -17,6 +17,13 @@ class ClipMain extends React.Component {
 
         // const player = new window.Twitch.Player("channel-main", options)
         // player.play()
+        window.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight") {
+                this.handleNext()
+            } else if (e.key === "ArrowLeft") {
+                this.handlePrevious()
+            }
+        })
     }
 
     handleTextChange = (e) => {
@@ -82,8 +89,8 @@ class ClipMain extends React.Component {
                     this.state.slugs.length > 0 &&
                     <iframe
                         src={`https://clips.twitch.tv/embed?clip=${this.state.slugs[0]}`}
-                        height={700}
-                        width={document.body.offsetWidth}
+                        height={window.innerHeight - 30}
+                        width={window.innerWidth}
                         scrolling={false}
                         allowfullscreen={true}
                         preload=""
